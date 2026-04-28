@@ -13,7 +13,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #1a202c;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 50%, #fef3c7 100%);
             min-height: 100vh;
             padding: 20px;
             display: flex;
@@ -22,46 +22,79 @@
         }
 
         .widget {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-            max-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+            max-width: 900px;
             width: 100%;
             overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
         .header {
-            background: linear-gradient(135deg, #4299e1, #3182ce);
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #0369a1 100%);
             color: white;
-            padding: 20px;
+            padding: 24px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-20%) rotate(0deg); }
+            50% { transform: translateX(20%) rotate(180deg); }
         }
 
         .header h1 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 4px;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.5px;
         }
 
         .header p {
-            font-size: 14px;
-            opacity: 0.9;
+            font-size: 15px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
         }
 
         .chart {
             display: grid;
-            grid-template-columns: 120px 1fr 140px 100px;
+            grid-template-columns: 110px 220px 140px 120px 140px;
             gap: 1px;
-            background: #e2e8f0;
+            background: rgba(226, 232, 240, 0.5);
             font-size: 13px;
+            padding: 2px;
         }
 
         .cell {
-            padding: 16px 12px;
-            background: white;
+            padding: 18px 14px;
+            background: rgba(255, 255, 255, 0.9);
             display: flex;
             align-items: center;
-            border-right: 1px solid #e2e8f0;
+            border-right: 1px solid rgba(226, 232, 240, 0.5);
+            transition: all 0.2s ease;
+        }
+
+        .cell:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-1px);
+            box-shadow: inset 0 2px 8px rgba(14, 165, 233, 0.1);
         }
 
         .cell:last-child {
@@ -69,100 +102,124 @@
         }
 
         .header-cell {
-            background: #4a5568;
+            background: linear-gradient(135deg, #059669, #047857);
             color: white;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-size: 12px;
+            letter-spacing: 1px;
+            font-size: 11px;
             justify-content: center;
-            padding: 14px 8px;
+            padding: 16px 10px;
+            position: relative;
+        }
+
+        .header-cell:nth-child(3) {
+            background: linear-gradient(135deg, #d97706, #b45309);
+        }
+
+        .header-cell:nth-child(5) {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
         }
 
         .case-name {
-            font-weight: 700;
-            color: #2d3748;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-size: 14px;
             text-transform: uppercase;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.5px;
         }
 
         .primary-use {
-            color: #4a5568;
-            font-weight: 500;
+            color: #1f2937;
+            font-weight: 600;
             line-height: 1.3;
+            font-size: 12.5px;
         }
 
         .endings {
-            font-family: 'Courier New', monospace;
-            background: #f7fafc;
-            color: #2b6cb0;
-            font-weight: 600;
-            padding: 6px 10px;
-            border-radius: 4px;
+            font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            color: #047857;
+            font-weight: 700;
+            padding: 10px 14px;
+            border-radius: 8px;
             font-size: 13px;
-            margin-left: auto;
+            box-shadow: 0 2px 8px rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.3);
         }
 
-        .quick-tip {
-            background: linear-gradient(135deg, #48bb78, #38a169);
-            color: white;
-            font-weight: 600;
-            font-size: 12px;
+        .prep-tip {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: #92400e;
+            font-weight: 700;
+            font-size: 11.5px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+        }
+
+        .example-word {
+            font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            color: #1e40af;
+            font-weight: 700;
             padding: 8px 12px;
             border-radius: 6px;
-            text-align: center;
+            font-size: 12px;
+            box-shadow: 0 2px 6px rgba(30, 64, 175, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.3);
         }
 
         .legend {
-            background: #edf2f7;
-            padding: 16px 20px;
-            font-size: 12px;
-            color: #4a5568;
+            background: rgba(248, 250, 252, 0.8);
+            padding: 20px;
+            font-size: 13px;
+            color: #374151;
+            border-top: 1px solid rgba(226, 232, 240, 0.5);
         }
 
         .legend-examples {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 12px;
-            margin-top: 12px;
-            font-size: 11px;
+            margin-top: 14px;
         }
 
         .example {
-            background: white;
-            padding: 8px;
-            border-radius: 4px;
-            border-left: 3px solid #4299e1;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #0ea5e9;
+            font-family: 'SF Mono', monospace;
+            font-size: 12px;
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 800px) {
             .chart {
-                grid-template-columns: 100px 1fr 120px 80px;
+                grid-template-columns: 100px 180px 120px 110px 130px;
                 font-size: 12px;
             }
-            
-            .cell {
-                padding: 12px 8px;
-            }
-            
-            .header h1 {
-                font-size: 20px;
-            }
         }
 
-        @media (max-width: 500px) {
+        @media (max-width: 600px) {
             .chart {
                 grid-template-columns: 1fr;
+                font-size: 13px;
             }
             
             .cell {
                 justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 8px;
             }
             
-            .endings {
-                margin-left: 0;
+            .endings, .prep-tip, .example-word {
                 order: -1;
+                margin-right: auto;
             }
         }
     </style>
@@ -171,117 +228,65 @@
     <div class="widget">
         <div class="header">
             <h1>🔤 Latin Noun Cases</h1>
-            <p>Quick reference chart - endings for all 5 declensions</p>
+            <p>Quick reference • All declensions • Real examples</p>
         </div>
 
         <div class="chart">
             <!-- Headers -->
             <div class="header-cell">Case</div>
             <div class="header-cell">Primary Use</div>
-            <div class="header-cell">Key Prepositions</div>
-            <div class="header-cell">Singular Endings</div>
+            <div class="header-cell">Prepositions</div>
+            <div class="header-cell">Endings</div>
+            <div class="header-cell">Example</div>
 
             <!-- Nominative -->
-            <div class="cell">
-                <div class="case-name">Nominative</div>
-            </div>
-            <div class="cell">
-                <div class="primary-use">Subject<br>Predicate nominative</div>
-            </div>
-            <div class="cell">
-                <div class="quick-tip">-</div>
-            </div>
-            <div class="cell">
-                <div class="endings">
-                    -a, -us, -um<br>-er, -∅
-                </div>
-            </div>
+            <div class="cell"><div class="case-name">Nominative</div></div>
+            <div class="cell"><div class="primary-use">Subject<br>Predicate noun</div></div>
+            <div class="cell"><div class="prep-tip">-</div></div>
+            <div class="cell"><div class="endings">-a, -us, -um<br>-er, ∅</div></div>
+            <div class="cell"><div class="example-word">puella</div></div>
 
             <!-- Genitive -->
-            <div class="cell">
-                <div class="case-name">Genitive</div>
-            </div>
-            <div class="cell">
-                <div class="primary-use">Possession ("of")<br>Partitive</div>
-            </div>
-            <div class="cell">-</div>
-            <div class="cell">
-                <div class="endings">
-                    -ae, -ī, -us<br>-ī, -is
-                </div>
-            </div>
+            <div class="cell"><div class="case-name">Genitive</div></div>
+            <div class="cell"><div class="primary-use">Possession ("of")<br>Partitive</div></div>
+            <div class="cell"><div class="prep-tip">-</div></div>
+            <div class="cell"><div class="endings">-ae, -ī, -us<br>-ī, -is</div></div>
+            <div class="cell"><div class="example-word">puellae</div></div>
 
             <!-- Dative -->
-            <div class="cell">
-                <div class="case-name">Dative</div>
-            </div>
-            <div class="cell">
-                <div class="primary-use">Indirect object<br>(to, for)</div>
-            </div>
-            <div class="cell">
-                <div class="quick-tip">in + dat.</div>
-            </div>
-            <div class="cell">
-                <div class="endings">
-                    -ae, -ō, -uī<br>-ō, -ē
-                </div>
-            </div>
+            <div class="cell"><div class="case-name">Dative</div></div>
+            <div class="cell"><div class="primary-use">Indirect object<br>(give to, for)</div></div>
+            <div class="cell"><div class="prep-tip">in + dat</div></div>
+            <div class="cell"><div class="endings">-ae, -ō, -uī<br>-ō, -ē</div></div>
+            <div class="cell"><div class="example-word">puellae</div></div>
 
             <!-- Accusative -->
-            <div class="cell">
-                <div class="case-name">Accusative</div>
-            </div>
-            <div class="cell">
-                <div class="primary-use">Direct object<br>Motion toward</div>
-            </div>
-            <div class="cell">
-                <div class="quick-tip">in, ad, per + acc.</div>
-            </div>
-            <div class="cell">
-                <div class="endings">
-                    -am, -um, -um<br>-um, -ōn
-                </div>
-            </div>
+            <div class="cell"><div class="case-name">Accusative</div></div>
+            <div class="cell"><div class="primary-use">Direct object<br>Motion toward</div></div>
+            <div class="cell"><div class="prep-tip">in, ad + acc</div></div>
+            <div class="cell"><div class="endings">-am, -um, -um<br>-ōn</div></div>
+            <div class="cell"><div class="example-word">puellam</div></div>
 
             <!-- Ablative -->
-            <div class="cell">
-                <div class="case-name">Ablative</div>
-            </div>
-            <div class="cell">
-                <div class="primary-use">Separation (from)<br>Means, manner, time</div>
-            </div>
-            <div class="cell">
-                <div class="quick-tip">in, cum, ab + abl.</div>
-            </div>
-            <div class="cell">
-                <div class="endings">
-                    -ā, -ō, -ō<br>-ē, -ibus
-                </div>
-            </div>
+            <div class="cell"><div class="case-name">Ablative</div></div>
+            <div class="cell"><div class="primary-use">From, by, with<br>Means, time when</div></div>
+            <div class="cell"><div class="prep-tip">in, cum + abl</div></div>
+            <div class="cell"><div class="endings">-ā, -ō, -ō<br>-ibus</div></div>
+            <div class="cell"><div class="example-word">puellā</div></div>
 
             <!-- Vocative -->
-            <div class="cell">
-                <div class="case-name">Vocative</div>
-            </div>
-            <div class="cell">
-                <div class="primary-use">Direct address</div>
-            </div>
-            <div class="cell">
-                <div class="quick-tip">Ō + voc.!</div>
-            </div>
-            <div class="cell">
-                <div class="endings">
-                    -a, -e, -um<br>= nom., -ī
-                </div>
-            </div>
+            <div class="cell"><div class="case-name">Vocative</div></div>
+            <div class="cell"><div class="primary-use">Direct address</div></div>
+            <div class="cell"><div class="prep-tip">ō + voc!</div></div>
+            <div class="cell"><div class="endings">-a, -e, =nom<br>-ī</div></div>
+            <div class="cell"><div class="example-word">puella</div></div>
         </div>
 
         <div class="legend">
-            <strong>Key:</strong> 1st (-a), 2nd (-us/-um), 3rd (-∅), 4th (-us), 5th (-ēs) | 
-            ∅ = no ending
+            <strong>puella, puellae</strong> (girl) • 1st(-a), 2nd(-us/-um), 3rd(∅), 4th(-us), 5th(-ēs) • ∅=no ending
             <div class="legend-examples">
-                <div class="example"><strong>porta</strong>: port<a>a</a>, port<a>ae</a>, port<a>ae</a>, port<a>am</a>, port<a>ā</a></div>
-                <div class="example"><strong>dominus</strong>: domin<u>us</u>, domin<u>ī</u>, domin<u>ō</u>, domin<u>um</u>, domin<u>ō</u></div>
+                <div class="example"><strong>dominus</strong>: dominus/dominī/dominō/dominum/dominō</div>
+                <div class="example"><strong>porta</strong>: porta/portae/portae/portam/portā</div>
             </div>
         </div>
     </div>
