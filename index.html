@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Latin Noun Cases</title>
+    <title>Latin Noun Cases Chart</title>
     <style>
         * {
             margin: 0;
@@ -15,142 +15,234 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
             min-height: 100vh;
+            padding: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
         }
 
         .widget {
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            padding: 30px;
-            max-width: 400px;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+            max-width: 900px;
             width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #1d4ed8;
+            color: white;
+            padding: 20px;
             text-align: center;
         }
 
-        .title {
-            font-size: 24px;
+        .header h1 {
+            font-size: 22px;
             font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 25px;
-            letter-spacing: -0.5px;
+            margin-bottom: 4px;
         }
 
-        .cases-grid {
+        .header p {
+            font-size: 14px;
+            opacity: 0.95;
+        }
+
+        .chart {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
+            grid-template-columns: 100px 220px 140px 120px 140px;
+            gap: 1px;
+            background: #e2e8f0;
+            font-size: 13px;
         }
 
-        .case-card {
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 20px;
-            transition: all 0.2s ease;
+        .cell {
+            padding: 16px 12px;
+            background: white;
+            display: flex;
+            align-items: center;
+            border-right: 1px solid #e2e8f0;
         }
 
-        .case-card:hover {
-            border-color: #3b82f6;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.15);
+        .cell:last-child {
+            border-right: none;
+        }
+
+        .header-cell {
+            background: #1f2937;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 12px;
+            justify-content: center;
+            padding: 14px 8px;
         }
 
         .case-name {
-            font-size: 16px;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .case-rule {
-            font-size: 14px;
-            color: #1e293b;
-            font-weight: 500;
-            margin-bottom: 10px;
-            line-height: 1.4;
-        }
-
-        .case-example {
-            font-size: 15px;
-            font-weight: 600;
+            font-weight: 700;
             color: #1d4ed8;
-            background: rgba(29, 78, 216, 0.1);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .primary-use {
+            color: #374151;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .endings {
+            font-family: 'Courier New', monospace;
+            background: #eff6ff;
+            color: #1d4ed8;
+            font-weight: 600;
             padding: 8px 12px;
             border-radius: 6px;
+            font-size: 13px;
+            margin-left: auto;
+            border: 1px solid #93c5fd;
+        }
+
+        .preps {
+            background: #dbeafe;
+            color: #1e40af;
+            font-weight: 600;
+            font-size: 12px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid #60a5fa;
+        }
+
+        .example {
             font-family: 'Courier New', monospace;
+            background: #f0f9ff;
+            color: #0ea5e9;
+            font-weight: 700;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            border: 1px solid #bae6fd;
         }
 
         .legend {
+            background: #f8fafc;
+            padding: 16px 20px;
             font-size: 12px;
-            color: #6b7280;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #e2e8f0;
+            color: #4b5563;
+            border-top: 2px solid #e2e8f0;
         }
 
-        @media (max-width: 480px) {
-            .cases-grid {
+        .legend-key {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+            font-size: 12px;
+        }
+
+        .key-item {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 4px solid #1d4ed8;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+
+        @media (max-width: 800px) {
+            .chart {
+                grid-template-columns: 90px 180px 120px 100px 130px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .chart {
                 grid-template-columns: 1fr;
-                gap: 15px;
             }
             
-            .widget {
-                padding: 20px;
+            .cell {
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            
+            .endings {
+                margin-left: 0;
+                order: -1;
             }
         }
     </style>
 </head>
 <body>
     <div class="widget">
-        <h1 class="title">Latin Noun Cases</h1>
-        
-        <div class="cases-grid">
-            <div class="case-card">
-                <div class="case-name">Nominative</div>
-                <div class="case-rule">Subject of the sentence</div>
-                <div class="case-example">puella</div>
-            </div>
+        <div class="header">
+            <h1>Latin Noun Cases</h1>
+            <p>Complete reference: function, prepositions, endings (all 5 declensions), examples</p>
+        </div>
 
-            <div class="case-card">
-                <div class="case-name">Genitive</div>
-                <div class="case-rule">Possession ("of")</div>
-                <div class="case-example">puellae</div>
-            </div>
+        <div class="chart">
+            <!-- Headers -->
+            <div class="header-cell">Case</div>
+            <div class="header-cell">Primary Function</div>
+            <div class="header-cell">Key Preps</div>
+            <div class="header-cell">Sg. Endings</div>
+            <div class="header-cell">Example</div>
 
-            <div class="case-card">
-                <div class="case-name">Dative</div>
-                <div class="case-rule">Indirect object (to/for)</div>
-                <div class="case-example">puellae</div>
-            </div>
+            <!-- Nominative -->
+            <div class="cell"><div class="case-name">Nom.</div></div>
+            <div class="cell"><div class="primary-use">Subject<br>Predicate noun</div></div>
+            <div class="cell"><div class="preps">-</div></div>
+            <div class="cell"><div class="endings">1: -a<br>2: -us, -um<br>3: -∅, -er<br>4: -us<br>5: -ēs</div></div>
+            <div class="cell"><div class="example">puella<br>(f. 1)</div></div>
 
-            <div class="case-card">
-                <div class="case-name">Accusative</div>
-                <div class="case-rule">Direct object</div>
-                <div class="case-example">puellam</div>
-            </div>
+            <!-- Genitive -->
+            <div class="cell"><div class="case-name">Gen.</div></div>
+            <div class="cell"><div class="primary-use">Possession (of)<br>Partitive, quality</div></div>
+            <div class="cell"><div class="preps">-</div></div>
+            <div class="cell"><div class="endings">1: -ae<br>2: -ī<br>3: -is<br>4: -ūs<br>5: -ēī</div></div>
+            <div class="cell"><div class="example">puellae<br>(f. 1)</div></div>
 
-            <div class="case-card">
-                <div class="case-name">Ablative</div>
-                <div class="case-rule">From, by, with, in</div>
-                <div class="case-example">puellā</div>
-            </div>
+            <!-- Dative -->
+            <div class="cell"><div class="case-name">Dat.</div></div>
+            <div class="cell"><div class="primary-use">Indirect object<br>Advantage (to/for)</div></div>
+            <div class="cell"><div class="preps">in, sub + dat</div></div>
+            <div class="cell"><div class="endings">1: -ae<br>2: -ō<br>3: -ī<br>4: -uī<br>5: -ēī</div></div>
+            <div class="cell"><div class="example">puellae<br>(f. 1)</div></div>
 
-            <div class="case-card">
-                <div class="case-name">Vocative</div>
-                <div class="case-rule">Direct address</div>
-                <div class="case-example">puella</div>
-            </div>
+            <!-- Accusative -->
+            <div class="cell"><div class="case-name">Acc.</div></div>
+            <div class="cell"><div class="primary-use">Direct object<br>Motion toward</div></div>
+            <div class="cell"><div class="preps">in, ad, per, trans + acc</div></div>
+            <div class="cell"><div class="endings">1: -am<br>2: -um<br>3: -em, -im<br>4: -um<br>5: -em</div></div>
+            <div class="cell"><div class="example">puellam<br>(f. 1)</div></div>
+
+            <!-- Ablative -->
+            <div class="cell"><div class="case-name">Abl.</div></div>
+            <div class="cell"><div class="primary-use">Separation (from)<br>Means, manner, time</div></div>
+            <div class="cell"><div class="preps">in, cum, ab, ex + abl</div></div>
+            <div class="cell"><div class="endings">1: -ā<br>2: -ō<br>3: -e<br>4: -ū<br>5: -ē</div></div>
+            <div class="cell"><div class="example">puellā<br>(f. 1)</div></div>
+
+            <!-- Vocative -->
+            <div class="cell"><div class="case-name">Voc.</div></div>
+            <div class="cell"><div class="primary-use">Direct address</div></div>
+            <div class="cell"><div class="preps">ō + voc</div></div>
+            <div class="cell"><div class="endings">1: -a<br>2: -e, -i<br>3: =nom<br>4: -us<br>5: -ēs</div></div>
+            <div class="cell"><div class="example">puella<br>(f. 1)</div></div>
         </div>
 
         <div class="legend">
-            Example: <strong>puella, puellae</strong> (2nd declension, "girl")
+            <strong>Example:</strong> puella, puellae f. (girl, 1st decl.) | 
+            <strong>Key:</strong> 1st(-a), 2nd(-us/-um), 3rd(-∅), 4th(-us), 5th(-ēs)
+            <div class="legend-key">
+                <div class="key-item"><strong>dominus</strong> m. 2nd<br>dominus/ī/ō/um/ō</div>
+                <div class="key-item"><strong>porta</strong> f. 1st<br>porta/ae/ae/am/ā</div>
+                <div class="key-item"><strong>rex</strong> m. 3rd<br>rēx/rēgis/rēgī/rēgem/rēge</div>
+            </div>
         </div>
     </div>
 </body>
