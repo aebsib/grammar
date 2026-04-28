@@ -52,8 +52,10 @@
             display: grid;
             grid-template-columns: 100px 220px 140px 120px 140px;
             gap: 1px;
-            background: #e2e8f0;
+            background: transparent; /* Fixed: removed gray background */
             font-size: 13px;
+            border: 1px solid #e2e8f0; /* Added border to contain the table */
+            border-top: none; /* No top border since header-cell has its own background */
         }
 
         .cell {
@@ -61,11 +63,17 @@
             background: white;
             display: flex;
             align-items: center;
-            border-right: 1px solid #e2e8f0;
+            position: relative; /* For proper border handling */
         }
 
-        .cell:last-child {
+        /* Remove individual cell borders since we're using grid gap */
+        .cell {
             border-right: none;
+        }
+
+        /* Last column cells need right border to match grid gap */
+        .chart > :nth-child(5n) {
+            border-right: 1px solid #e2e8f0;
         }
 
         .header-cell {
@@ -162,17 +170,28 @@
         @media (max-width: 600px) {
             .chart {
                 grid-template-columns: 1fr;
+                border: none;
             }
             
             .cell {
                 justify-content: space-between;
                 flex-wrap: wrap;
                 gap: 8px;
+                border-bottom: 1px solid #e2e8f0;
+            }
+            
+            .cell:last-child {
+                border-bottom: none;
             }
             
             .endings {
                 margin-left: 0;
                 order: -1;
+            }
+            
+            /* Reset last column selector for mobile */
+            .chart > :nth-child(5n) {
+                border-right: none;
             }
         }
     </style>
